@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock, Paper, Scissors</title>
+</head>
+<body>
+
+<div id="game">
+	<p>Press r, p, or s to start playing!</p>
+	<p>Good luck</p>
+</div>
+
+	<script type="text/javascript">
+
+		//userGuess will be reassigned everytime a user presses a key
+		//Accounting for User Error just incase user does not following instructions hence the use toLowerCase.
+		//Need to have computer randomly select R, P or S
+
+		//Paper Beats Rock, Rock beats scissors, scissors beat paper
+
+		var options = ["r", "p", "s"];
+
+		var wins = 0;
+		var losses = 0;
+		var ties = 0;
+
+		document.onkeyup = function() {
+			var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+			console.log(userGuess);
+
+			//Math.Random = random number between 0 and 1 and multiplied by the count of the array. Math.floor rounds down to the number below. To prevent the number from going above the existing array
+
+			var computerGuess = options[Math.floor(Math.random()*options.length)];
+
+			console.log(computerGuess);
+			//logic to see who wins/loses/ties
+			if (userGuess=="p" || userGuess=="r" || userGuess=="s") {
+				if (userGuess==computerGuess) {
+					ties++;
+				} 
+				if ((userGuess=="r") && (computerGuess=="p")) {
+					losses++;
+				}
+				if ((userGuess=="r") && (computerGuess=="s")) {
+					wins++;
+				}
+				if ((userGuess=="p") && (computerGuess=="s")) {
+					losses++;
+				}
+				if ((userGuess=="p") && (computerGuess=="r")) {
+					wins++;
+				}
+				if ((userGuess=="s") && (computerGuess=="r")) {
+					losses++;
+				}
+				if ((userGuess=="s") && (computerGuess=="p")) {
+					wins++;
+				}
+			} else {
+				alert("Please choose r, p, or s !");
+			}
+			//
+			var html ="<p>Press r, p, or s to start playing</P>" + 
+			"<p>wins: " + wins + "</p>" + 
+			"<p>losses: " + losses + "</p>" + 
+			"<p>ties: " + ties + "</p>";
+
+			document.querySelector("#game").innerHTML = html;
+		}
+		
+	</script>
+</body>
+</html>
